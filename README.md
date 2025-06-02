@@ -371,23 +371,3 @@ Selanjutnya, sesuaikan tag form dengan menambahkan atribut `enctype` seperti ber
 Akses menu tambah artikel dan uji coba upload gambar.
 
 ![add file](https://github.com/user-attachments/assets/1594db5a-95d1-47c6-a9b0-dbaaf54bf576)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
