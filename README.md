@@ -254,6 +254,135 @@ public function logout()
 
 Lakukan modifikasi pada controller `Artikel` untuk menambahkan fitur paginasi:
 
+```php
+public function admin_index()
+{
+    $title = 'Daftar Artikel';
+    $model = new ArtikelModel();
+    $data = [
+        'title' => $title,
+        'artikel' => $model->paginate(10), #data dibatasi 10 record per halaman
+        'pager' => $model->pager,
+    ];
+    return view('artikel/admin_index', $data);
+}
+```
+
+Selanjutnya, buka file `views/artikel/admin_index.php` dan tambahkan kode berikut di bawah deklarasi tabel data:
+
+```php
+<?= $pager->links(); ?>
+```
+
+Selanjutnya, kembali buka menu daftar artikel dan tambahkan data baru untuk melihat hasil perubahan.
+
+![pagination](https://github.com/user-attachments/assets/beebe297-2c60-40ed-a2c9-82894abf9b38)
+
+### 2. Membuat Pencarian
+
+Lakukan perubahan pada controller untuk mengintegrasikan fungsi pencarian data:
+
+```php
+public function admin_index()
+    {
+        $title = 'Daftar Artikel';
+        $q = $this->request->getVar('q') ?? '';
+        $model = new ArtikelModel();
+        $data = [
+            'title' => $title,
+            'q' => $q,
+            'artikel' => $model->like('judul', $q)->paginate(10), # data dibatasi 10 record per halaman
+            'pager' => $model->pager,
+        ];
+        return view('artikel/admin_index', $data);
+    }
+```
+
+Selanjutnya, buka kembali file `views/artikel/admin_index.php` dan sisipkan form pencarian tepat sebelum deklarasi tabel dengan kode berikut:
+
+```php
+<form method="get" class="form-search">
+    <input type="text" name="q" value="<?= $q; ?>" placeholder="Cari data">
+    <input type="submit" value="Cari" class="btn btn-primary">
+</form>
+```
+
+Kemudian, ubah link pager menjadi seperti berikut:
+
+```php
+<?= $pager->only(['q'])->links(); ?>
+```
+
+### 3. Uji Coba Pagination dan Pencarian
+
+Kemudian, coba buka kembali halaman admin artikel dan gunakan form pencarian dengan memasukkan kata kunci tertentu.
+
+![search](https://github.com/user-attachments/assets/04b7002b-b469-46b9-b387-b5678af1d2af)
+
+
+## Praktikum 6: Upload File Gambar
+
+### 1. Modifikasi Controller Artikel
+
+Kemudian, akses kembali Controller `Artikel` pada proyek sebelumnya dan perbarui kode pada method `add` sesuai dengan contoh berikut:
+
+```php
+public function add()
+    {
+        // validasi data.
+        $validation = \Config\Services::validation();
+        $validation->setRules(['judul' => 'required']);
+        $isDataValid = $validation->withRequest($this->request)->run();
+        if ($isDataValid) {
+            $file = $this->request->getFile('gambar');
+            $file->move(ROOTPATH . 'public/gambar');
+            $artikel = new ArtikelModel();
+            $artikel->insert([
+                'judul' => $this->request->getPost('judul'),
+                'isi' => $this->request->getPost('isi'),
+                'slug' => url_title($this->request->getPost('judul')),
+                'gambar' => $file->getName(),
+            ]);
+            return redirect('admin/artikel');
+        }
+        $title = "Tambah Artikel";
+        return view('artikel/form_add', compact('title'));
+    }
+```
+
+### 2. Modifikasi View Artikel
+
+Sisipkan field input file pada form artikel: 
+
+```php
+<p>
+    <input type="file" name="gambar">
+</p>
+```
+
+Selanjutnya, sesuaikan tag form dengan menambahkan atribut `enctype` seperti berikut:
+
+```php
+<form action="" method="post" enctype="multipart/form-data">
+```
+
+### 3. Uji Coba Upload Gambar
+
+Akses menu tambah artikel dan uji coba upload gambar.
+
+![add file](https://github.com/user-attachments/assets/1594db5a-95d1-47c6-a9b0-dbaaf54bf576)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
