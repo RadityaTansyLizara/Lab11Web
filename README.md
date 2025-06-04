@@ -249,7 +249,8 @@ Setelah itu, buka file `app/Config/Routes.php` dan lakukan penyesuaian kode.
 Buka URL dengan alamat http://localhost:8080/admin/artikel.
 Saat alamat tersebut diakses, halaman login akan otomatis ditampilkan.
 
-![alt text](img/auth.png)
+![auth (2)](https://github.com/user-attachments/assets/9ac27aa4-43a2-49bb-8eee-0fb49c2a88e4)
+
 
 #### 8. Fungsi Logout
 
@@ -290,7 +291,7 @@ Lanjutkan dengan membuka file `views/artikel/admin_index.php` lalu masukkan kode
 ```
 Setelah itu, buka kembali menu daftar artikel dan masukkan data baru untuk memastikan hasilnya.
 
-![alt text](img/pagination.png)
+![pagination (1)](https://github.com/user-attachments/assets/196cc3ee-5a33-4e21-92ca-88bdf59edf89)
 
 #### 2. Membuat Pencarian
 
@@ -328,7 +329,8 @@ Perbarui link pager agar mengikuti format berikut.
 #### 3. Uji Coba Pagination dan Pencarian
 
 Lanjutkan dengan membuka halaman admin artikel, lalu ketikkan kata kunci pada form pencarian untuk menguji fungsinya.
-![alt text](img/search.png)
+![search](https://github.com/user-attachments/assets/239753db-a381-4bf6-a198-bae237f4d2e1)
+
 
 ---
 
@@ -381,6 +383,7 @@ Ubah tag form dengan menyisipkan atribut enctype sesuai contoh berikut.
 
 Masuk ke menu tambah artikel dan uji fungsi unggah gambar.
 
-![alt text](<img/add file.png>)
+![add file (1)](https://github.com/user-attachments/assets/79c59030-bad3-430e-ba0f-c9d0a26d28b7)
+
 ---
 
