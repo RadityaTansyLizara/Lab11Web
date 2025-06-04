@@ -9,7 +9,7 @@
 
 |                 |                        |
 | --------------- | ---------------------- |
-| **Nama**        | Muhammad Nurul Firdaus |
+| **Nama**        |Raditya Tansy Lizara |
 | **Kelas**       | TI.23.A.5              |
 | **Mata Kuliah** | Pemrograman Web 2      |
 
