@@ -202,7 +202,8 @@ php spark db:seed UserSeeder
 
 #### Uji Coba Login
 
-![alt text](img/auth.png)
+![auth (1)](https://github.com/user-attachments/assets/b8ad7dbe-b4bf-4d18-9bda-78127b01cbeb)
+
 
 #### 6. Membuat Filter Auth
 
@@ -238,9 +239,11 @@ Selanjutnya buka file app/Config/Filters.php tambahkan kode berikut:
 'auth' => App\Filters\Auth::class
 ```
 
-![alt text](<img/Auth Filters.png>)
+![Auth Filters (1)](https://github.com/user-attachments/assets/4ac31538-8c74-4a55-8cea-2a29cdaa03d6)
+
 Selanjutnya buka file app/Config/Routes.php dan sesuaikan kodenya.
-![alt text](img/Routes.png)
+![Routes (1)](https://github.com/user-attachments/assets/d8133e09-3882-419b-8abc-dccd66b5c81c)
+
 
 #### 7. Percobaan Akses Menu Admin
 
