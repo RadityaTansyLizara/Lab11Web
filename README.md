@@ -1,20 +1,27 @@
-# Praktikum 4-6
+# Praktikum ke 4 - 6
+
+<p align='center'>
+    <img src=img/php.png width="120px" height="120px">
+    <img src=img/ci.png width="120px" height="120px">
+</p>
 
 ## Profil
-|  |  |
-| -------- | --- |
-| **Nama** |Raditya Tansy Lizara |
-| **Kelas** | TI.23.A.5 |
-| **Mata Kuliah** | Pemrograman Web 2 |
 
-## Langkah - Langkah Praktikum
+|                 |                        |
+| --------------- | ---------------------- |
+| **Nama**        | Muhammad Nurul Firdaus |
+| **Kelas**       | TI.23.A.5              |
+| **Mata Kuliah** | Pemrograman Web 2      |
 
-## Praktikum 4: Membuat Sistem Login
-### 1. Menyiapkan Basis Data
-   
-Buatlah tabel user pada basis data dengan menggunakan perintah SQL berikut:
+## Langkah-langkah Praktikum
 
-```php
+### **Praktikum 4: Membuat Sistem Login**
+
+#### 1. Persiapkan Database
+
+Buat tabel `user` pada database dengan SQL berikut:
+
+```sql
 CREATE TABLE user (
   id INT(11) auto_increment,
   username VARCHAR(200) NOT NULL,
@@ -24,11 +31,11 @@ CREATE TABLE user (
 );
 ```
 
-![database](https://github.com/user-attachments/assets/885fbd67-be7f-4191-accc-33562233b33a)
+![alt text](img/database.png)
 
-### 2. Membuat Model User
+#### 2. Membuat Model User
 
-Buatlah file model UserModel.php di dalam direktori app/Models:
+Buat model `UserModel.php` pada direktori `app/Models`:
 
 ```php
 <?php
@@ -44,9 +51,9 @@ class UserModel extends Model
 }
 ```
 
-### 3. Membuat Controller User
+#### 3. Membuat Controller User
 
-Buatlah file controller `User.php` dengan metode `index()` dan `login()` yang berfungsi untuk mengelola data pengguna serta proses login:
+Buat controller `User.php` dengan method `index()` dan `login()` untuk mengelola user dan login:
 
 ```php
 <?php
@@ -107,11 +114,11 @@ class User extends BaseController
 }
 ```
 
-### 4. Membuat View Login
+#### 4. Membuat View Login
 
-Buatlah file view `login.php` yang berisi form untuk proses login:
+Buat view `login.php` untuk form login:
 
-```php
+```html
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -156,15 +163,15 @@ Buatlah file view `login.php` yang berisi form untuk proses login:
 </html>
 ```
 
-### 5. Membuat Databse Seeder
+#### 5. Membuat Database Seeder
 
-Database seeder digunakan untuk menghasilkan data dummy. Dalam rangka pengujian modul login, diperlukan data pengguna dan kata sandi yang dimasukkan ke dalam basis data. Oleh karena itu, buatlah *database seeder* untuk tabel `user`. Buka Command Line Interface (CLI), lalu jalankan perintah berikut:
+Database seeder digunakan untuk membuat data dummy. Untuk keperluan ujicoba modul login, kita perlu memasukkan data user dan password kedaalam database. Untuk itu buat database seeder untuk tabel user. Buka CLI, kemudian tulis perintah berikut:
 
 ```php
 php spark make:seeder UserSeeder
 ```
 
-Selanjutnya, buka file `UserSeeder.php` yang terletak di direktori `app/Database/Seeds/UserSeeder.php`, kemudian isi file tersebut dengan kode berikut:
+Selanjutnya, buka file UserSeeder.php yang berada di lokasi direktori/app/Database/Seeds/UserSeeder.php kemudian isi dengan kode berikut:
 
 ```php
 <?php
@@ -187,13 +194,19 @@ class UserSeeder extends Seeder
 }
 ```
 
-Langkah berikutnya, buka kembali Command Line Interface (CLI) dan jalankan perintah berikut:
+Selanjutnya buka kembali CLI dan ketik perintah berikut:
 
-![auth](https://github.com/user-attachments/assets/1dd2d03e-25ad-4b31-82df-4e6b7c960d5c)
+```php
+php spark db:seed UserSeeder
+```
 
-### 6. Membuat Filter Auth
+#### Uji Coba Login
 
-Buat file filter `Auth.php` untuk membatasi akses ke halaman admin hanya bagi pengguna yang sudah login.
+![alt text](img/auth.png)
+
+#### 6. Membuat Filter Auth
+
+Buat filter `Auth.php` untuk membatasi akses ke halaman admin:
 
 ```php
 <?php namespace App\Filters;
@@ -218,27 +231,25 @@ class Auth implements FilterInterface
     }
 }
 ```
-Setelah itu, akses file `app/Config/Filters.php` dan tambahkan kode berikut:
+
+Selanjutnya buka file app/Config/Filters.php tambahkan kode berikut:
 
 ```php
 'auth' => App\Filters\Auth::class
 ```
 
-![Auth Filters](https://github.com/user-attachments/assets/b509e76f-45eb-4fcb-b34d-50d811a82109)
+![alt text](<img/Auth Filters.png>)
+Selanjutnya buka file app/Config/Routes.php dan sesuaikan kodenya.
+![alt text](img/Routes.png)
 
-Kemudian, buka file `app/Config/Routes.php` dan lakukan penyesuaian pada kodenya.
+#### 7. Percobaan Akses Menu Admin
 
-![Routes](https://github.com/user-attachments/assets/78efd2de-9ca4-484e-b899-d934b5585b0f)
+Buka url dengan alamat http://localhost:8080/admin/artikel ketika alamat tersebut diakses maka, akan dimuculkan halaman login.
+![alt text](img/auth.png)
 
-### 7. Percobaan Menu Akses Admin
+#### 8. Fungsi Logout
 
-Buka URL [http://localhost:8080/admin/artikel](http://localhost:8080/admin/artikel); saat alamat tersebut diakses, halaman login akan ditampilkan.
-
-![auth (1)](https://github.com/user-attachments/assets/37f27345-35c1-4756-8d79-f2f62889a155)
-
-### 8. Fungsi Logout
-
-Tambahkan metode `logout` pada Controller `User` dengan kode sebagai berikut:
+Tambahkan method logout pada Controller User seperti berikut:
 
 ```php
 public function logout()
@@ -248,11 +259,13 @@ public function logout()
     }
 ```
 
-## Praktikum 5: Pagination dan Pencarian
+---
 
-### 1. Membuat Pagination
+### **Praktikum 5: Pagination dan Pencarian**
 
-Lakukan modifikasi pada controller `Artikel` untuk menambahkan fitur paginasi:
+#### 1. Membuat Pagination
+
+Modifikasi controller artikel untuk menambahkan pagination:
 
 ```php
 public function admin_index()
@@ -267,20 +280,16 @@ public function admin_index()
     return view('artikel/admin_index', $data);
 }
 ```
-
-Selanjutnya, buka file `views/artikel/admin_index.php` dan tambahkan kode berikut di bawah deklarasi tabel data:
-
+Kemudian buka file views/artikel/admin_index.php dan tambahkan kode berikut dibawah deklarasi tabel data.
 ```php
 <?= $pager->links(); ?>
 ```
+Selanjutnya buka kembali menu daftar artikel, tambahkan data lagi untuk melihat hasilnya.
+![alt text](img/pagination.png)
 
-Selanjutnya, kembali buka menu daftar artikel dan tambahkan data baru untuk melihat hasil perubahan.
+#### 2. Membuat Pencarian
 
-![pagination](https://github.com/user-attachments/assets/beebe297-2c60-40ed-a2c9-82894abf9b38)
-
-### 2. Membuat Pencarian
-
-Lakukan perubahan pada controller untuk mengintegrasikan fungsi pencarian data:
+Modifikasi controller untuk menambahkan pencarian data:
 
 ```php
 public function admin_index()
@@ -297,34 +306,30 @@ public function admin_index()
         return view('artikel/admin_index', $data);
     }
 ```
-
-Selanjutnya, buka kembali file `views/artikel/admin_index.php` dan sisipkan form pencarian tepat sebelum deklarasi tabel dengan kode berikut:
-
-```php
+Kemudian buka kembali file views/artikel/admin_index.php dan tambahkan form pencarian sebelum deklarasi tabel seperti berikut:
+```html
 <form method="get" class="form-search">
     <input type="text" name="q" value="<?= $q; ?>" placeholder="Cari data">
     <input type="submit" value="Cari" class="btn btn-primary">
 </form>
 ```
-
-Kemudian, ubah link pager menjadi seperti berikut:
-
+Dan pada link pager ubah seperti berikut.
 ```php
 <?= $pager->only(['q'])->links(); ?>
 ```
 
-### 3. Uji Coba Pagination dan Pencarian
+#### 3. Uji Coba Pagination dan Pencarian
 
-Kemudian, coba buka kembali halaman admin artikel dan gunakan form pencarian dengan memasukkan kata kunci tertentu.
+Selanjutnya ujicoba dengan membuka kembali halaman admin artikel, masukkan kata kunci tertentu pada form pencarian.
+![alt text](img/search.png)
 
-![search](https://github.com/user-attachments/assets/04b7002b-b469-46b9-b387-b5678af1d2af)
+---
 
+### **Praktikum 6: Upload File Gambar**
 
-## Praktikum 6: Upload File Gambar
+#### 1. Modifikasi Controller Artikel
 
-### 1. Modifikasi Controller Artikel
-
-Kemudian, akses kembali Controller `Artikel` pada proyek sebelumnya dan perbarui kode pada method `add` sesuai dengan contoh berikut:
+Buka kembali Controller Artikel pada project sebelumnya, sesuaikan kode pada method add seperti berikut:
 
 ```php
 public function add()
@@ -350,24 +355,30 @@ public function add()
     }
 ```
 
-### 2. Modifikasi View Artikel
+#### 2. Modifikasi View Artikel
 
-Sisipkan field input file pada form artikel: 
+Tambahkan field input file pada form artikel:
 
-```php
+```html
 <p>
     <input type="file" name="gambar">
 </p>
 ```
-
-Selanjutnya, sesuaikan tag form dengan menambahkan atribut `enctype` seperti berikut:
-
-```php
+Dan sesuaikan tag form dengan menambahkan ecrypt type seperti berikut.
+```html
 <form action="" method="post" enctype="multipart/form-data">
 ```
 
-### 3. Uji Coba Upload Gambar
+#### 3. Uji Coba Upload Gambar
 
 Akses menu tambah artikel dan uji coba upload gambar.
+![alt text](<img/add file.png>)
+---
 
-![add file](https://github.com/user-attachments/assets/1594db5a-95d1-47c6-a9b0-dbaaf54bf576)
+## Laporan Praktikum
+
+1. Pastikan untuk screenshot setiap perubahan yang dilakukan pada setiap langkah praktikum.
+2. Update file `README.md` dan tuliskan penjelasan serta screenshot dari setiap langkah praktikum.
+3. Commit hasilnya pada repository dan kirimkan URL repository ke e-learning.
+
+---
