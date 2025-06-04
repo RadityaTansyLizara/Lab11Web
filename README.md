@@ -31,7 +31,7 @@ CREATE TABLE user (
 );
 ```
 
-![alt text](img/database.png)
+![database (1)](https://github.com/user-attachments/assets/376e1a78-e80e-4c6d-892b-491859c8cf02)
 
 #### 2. Membuat Model User
 
